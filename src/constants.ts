@@ -20,7 +20,7 @@ export enum Rounding {
 }
 
 // export const FACTORY_ADDRESS = '0xcA143Ce32Fe78f1f7019d7d551a6402fC5350c73'
-export const FACTORY_ADDRESS = '0x5FaD1DE9fcE9cC1E8A82F8065dFB8D3bdACD3b06'
+export const FACTORY_ADDRESS = '0x9A272d734c5a0d7d84E0a892e891a553e8066dce'
 
 export const FACTORY_ADDRESS_MAP = {
   [ChainId.MAINNET]: FACTORY_ADDRESS,
@@ -28,7 +28,7 @@ export const FACTORY_ADDRESS_MAP = {
 }
 
 // export const INIT_CODE_HASH = '0x00fb7f630766e6a796048ea87d01acd3068e8ff67d078148a3fa3f4a84f69bd5'
-export const INIT_CODE_HASH = '0x4331943f0d6f87c787e2402b24f7c70a57961a6ebdf911d288c3e275aa0b3b6a'
+export const INIT_CODE_HASH = '0xa09f7ad489ebacc50d67f97c0fe03a38d38ddbbbb56d1cf44cd44317f5d59fdb'
 
 export const INIT_CODE_HASH_MAP = {
   [ChainId.MAINNET]: INIT_CODE_HASH,
