@@ -20,7 +20,7 @@ var _FACTORY_ADDRESS_MAP, _INIT_CODE_HASH_MAP, _SOLIDITY_TYPE_MAXIMA;
 
 (function (ChainId) {
   // MAINNET = 56,
-  ChainId[ChainId["MAINNET"] = 2000] = "MAINNET";
+  ChainId[ChainId["MAINNET"] = 61] = "MAINNET";
   ChainId[ChainId["TESTNET"] = 97] = "TESTNET";
 })(exports.ChainId || (exports.ChainId = {}));
 
@@ -36,10 +36,10 @@ var _FACTORY_ADDRESS_MAP, _INIT_CODE_HASH_MAP, _SOLIDITY_TYPE_MAXIMA;
 })(exports.Rounding || (exports.Rounding = {})); // export const FACTORY_ADDRESS = '0xcA143Ce32Fe78f1f7019d7d551a6402fC5350c73'
 
 
-var FACTORY_ADDRESS = '0xa86df61e976DCaC4F13CC1a082Ab910031bbDF01';
+var FACTORY_ADDRESS = '0xD06e46a11dC2B4E7D1239B686E22d3Fc3Ef620fF';
 var FACTORY_ADDRESS_MAP = (_FACTORY_ADDRESS_MAP = {}, _FACTORY_ADDRESS_MAP[exports.ChainId.MAINNET] = FACTORY_ADDRESS, _FACTORY_ADDRESS_MAP[exports.ChainId.TESTNET] = '0x6346832B1848B17Cc04BBf147a41B04b467D0C19', _FACTORY_ADDRESS_MAP); // export const INIT_CODE_HASH = '0x00fb7f630766e6a796048ea87d01acd3068e8ff67d078148a3fa3f4a84f69bd5'
 
-var INIT_CODE_HASH = '0xfabc1ee1e51e16b30f8d5bf0d345aa1aaf083cb7efab9fee630751470626860c';
+var INIT_CODE_HASH = '0x7b629e0d3c66371bcc592e75218cf8bbe2e6a2d0197d966058b869a294eecec0';
 var INIT_CODE_HASH_MAP = (_INIT_CODE_HASH_MAP = {}, _INIT_CODE_HASH_MAP[exports.ChainId.MAINNET] = INIT_CODE_HASH, _INIT_CODE_HASH_MAP[exports.ChainId.TESTNET] = '0x4331943f0d6f87c787e2402b24f7c70a57961a6ebdf911d288c3e275aa0b3b6a', _INIT_CODE_HASH_MAP);
 var MINIMUM_LIQUIDITY = /*#__PURE__*/JSBI.BigInt(1000); // exports for internal consumption
 
@@ -374,7 +374,7 @@ function Currency(decimals, symbol, name) {
  */
 // public static readonly ETHER: Currency = new Currency(18, 'BNB', 'BNB')
 
-Currency.ETHER = /*#__PURE__*/new Currency(18, 'WDOGE', 'WDOGE');
+Currency.ETHER = /*#__PURE__*/new Currency(18, 'ETC', 'ETC');
 var ETHER = Currency.ETHER;
 
 var _WETH;
@@ -441,7 +441,7 @@ function currencyEquals(currencyA, currencyB) {
     return currencyA === currencyB;
   }
 }
-var WETH = (_WETH = {}, _WETH[exports.ChainId.MAINNET] = /*#__PURE__*/new Token(exports.ChainId.MAINNET, '0xE2b1468bE203090514e59413EF3C9DC0fBFFf493', 18, 'WDOGE', 'Wrapped WDOGE', 'https://www.binance.org'), _WETH[exports.ChainId.TESTNET] = /*#__PURE__*/new Token(exports.ChainId.TESTNET, '0xae13d989daC2f0dEbFf460aC112a837C89BAa7cd', 18, 'WBNB', 'Wrapped BNB', 'https://www.binance.org'), _WETH);
+var WETH = (_WETH = {}, _WETH[exports.ChainId.MAINNET] = /*#__PURE__*/new Token(exports.ChainId.MAINNET, '0x82A618305706B14e7bcf2592D4B9324A366b6dAd', 18, 'WETC', 'Wrapped ETC', 'https://www.binance.org'), _WETH[exports.ChainId.TESTNET] = /*#__PURE__*/new Token(exports.ChainId.TESTNET, '0xae13d989daC2f0dEbFf460aC112a837C89BAa7cd', 18, 'WBNB', 'Wrapped BNB', 'https://www.binance.org'), _WETH);
 
 var _toSignificantRoundin, _toFixedRounding;
 var Decimal = /*#__PURE__*/toFormat(_Decimal);
@@ -778,7 +778,7 @@ var Pair = /*#__PURE__*/function () {
   function Pair(tokenAmountA, tokenAmountB) {
     var tokenAmounts = tokenAmountA.token.sortsBefore(tokenAmountB.token) // does safety checks
     ? [tokenAmountA, tokenAmountB] : [tokenAmountB, tokenAmountA];
-    this.liquidityToken = new Token(tokenAmounts[0].token.chainId, Pair.getAddress(tokenAmounts[0].token, tokenAmounts[1].token), 18, 'Shiba-LP', 'Shiba LPs');
+    this.liquidityToken = new Token(tokenAmounts[0].token.chainId, Pair.getAddress(tokenAmounts[0].token, tokenAmounts[1].token), 18, 'Coke-LP', 'Coke LPs');
     this.tokenAmounts = tokenAmounts;
   }
 
