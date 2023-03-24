@@ -15,7 +15,7 @@ import {
   FIVE,
   FEES_NUMERATOR,
   FEES_DENOMINATOR,
-  ChainId
+  ChainId, LP_NAME, LP_SYMBOL
 } from '../constants'
 import { sqrt, parseBigintIsh } from '../utils'
 import { InsufficientReservesError, InsufficientInputAmountError } from '../errors'
@@ -29,7 +29,7 @@ export class Pair {
   public readonly liquidityToken: Token
   private readonly tokenAmounts: [TokenAmount, TokenAmount]
 
-  public static getAddress(tokenA: Token, tokenB: Token): string {
+  public static getAddress(tokenA: Token, tokenB: Token, factory?: string, initCodeHash?: string): string {
     const [token0, token1] = tokenA.sortsBefore(tokenB) ? [tokenA, tokenB] : [tokenB, tokenA] // does safety checks
 
     const key = composeKey(token0, token1)
@@ -38,9 +38,9 @@ export class Pair {
       PAIR_ADDRESS_CACHE = {
         ...PAIR_ADDRESS_CACHE,
         [key]: getCreate2Address(
-          FACTORY_ADDRESS_MAP[token0.chainId],
+            factory ?? FACTORY_ADDRESS_MAP[token0.chainId],
           keccak256(['bytes'], [pack(['address', 'address'], [token0.address, token1.address])]),
-          INIT_CODE_HASH_MAP[token0.chainId]
+            initCodeHash ?? INIT_CODE_HASH_MAP[token0.chainId]
         )
       }
     }
@@ -55,9 +55,9 @@ export class Pair {
     this.liquidityToken = new Token(
       tokenAmounts[0].token.chainId,
       Pair.getAddress(tokenAmounts[0].token, tokenAmounts[1].token),
-      18,
-      'Cake-LP',
-      'Pancake LPs'
+        18,
+        LP_SYMBOL,
+        LP_NAME
     )
     this.tokenAmounts = tokenAmounts as [TokenAmount, TokenAmount]
   }

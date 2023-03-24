@@ -1,5 +1,5 @@
 import invariant from 'tiny-invariant'
-import {ETHNative, InsufficientInputAmountError, InsufficientReservesError} from '..'
+import {InsufficientInputAmountError, InsufficientReservesError} from '..'
 
 import { ChainId, ONE, TradeType, ZERO } from '../constants'
 import { sortedInsert } from '../utils'
@@ -90,13 +90,15 @@ export interface BestTradeOptions {
  */
 function wrappedAmount(currencyAmount: CurrencyAmount, chainId: ChainId): TokenAmount {
   if (currencyAmount instanceof TokenAmount) return currencyAmount
-  if (currencyAmount.currency === ETHNative[chainId]) return new TokenAmount(WETH[chainId], currencyAmount.raw)
+  // if (currencyAmount.currency === ETHNative[chainId]) return new TokenAmount(WETH[chainId], currencyAmount.raw)
+  if (currencyAmount.currency.isNative) return new TokenAmount(WETH[chainId], currencyAmount.raw)
   invariant(false, 'CURRENCY')
 }
 
 function wrappedCurrency(currency: Currency, chainId: ChainId): Token {
   if (currency instanceof Token) return currency
-  if (currency === ETHNative[chainId]) return WETH[chainId]
+  // if (currency === ETHNative[chainId]) return WETH[chainId]
+  if (currency.isNative) return WETH[chainId]
   invariant(false, 'CURRENCY')
 }
 
@@ -180,13 +182,15 @@ export class Trade {
     this.inputAmount =
       tradeType === TradeType.EXACT_INPUT
         ? amount
-        : route.input === ETHNative[route.chainId]
+        // : route.input === ETHNative[route.chainId]
+        : route.input.isNative
         ? CurrencyAmount.ether(route.chainId, amounts[0].raw)
         : amounts[0]
     this.outputAmount =
       tradeType === TradeType.EXACT_OUTPUT
         ? amount
-        : route.output === ETHNative[route.chainId]
+        // : route.output === ETHNative[route.chainId]
+        : route.output.isNative
         ? CurrencyAmount.ether(route.chainId, amounts[amounts.length - 1].raw)
         : amounts[amounts.length - 1]
     this.executionPrice = new Price(

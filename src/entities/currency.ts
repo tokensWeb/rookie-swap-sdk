@@ -14,10 +14,13 @@ export class Currency {
   public readonly symbol: string
   public readonly name?: string
 
+  public readonly isNative?: boolean
+
   /**
    * The only instance of the base class `Currency`.
    */
-  public static readonly ETHER: Currency = new Currency(ChainId.BSC,18, 'BNB', 'BNB')
+
+  // public static readonly ETHER: Currency = new Currency(ChainId.BSC,18, 'BNB', 'BNB')
 
   /**
    * Constructs an instance of the base class `Currency`. The only instance of the base class `Currency` is `Currency.ETHER`.
@@ -25,12 +28,13 @@ export class Currency {
    * @param symbol symbol of the currency
    * @param name of the currency
    */
-  protected constructor(chainId: number, decimals: number, symbol: string, name?: string) {
+  protected constructor(chainId: number, decimals: number, symbol: string, name?: string, isNative?: boolean) {
     validateSolidityTypeInstance(JSBI.BigInt(decimals), SolidityType.uint8)
     this.chainId = chainId
     this.decimals = decimals
     this.symbol = symbol
     this.name = name
+    this.isNative = isNative
   }
 }
 
@@ -39,30 +43,35 @@ export const ETHNative: {[chainId: number] : Currency}  = {
     chainId: ChainId.ETHEREUM,
     decimals: 18,
     symbol: "ETH",
-    name: "ETH"
+    name: "ETH",
+    isNative: true
   },
   [ChainId.RINKEBY]: {
     chainId: ChainId.RINKEBY,
     decimals: 18,
     symbol: "ETH",
-    name: "ETH"
+    name: "ETH",
+    isNative: true
   },
   [ChainId.GOERLI]: {
     chainId: ChainId.GOERLI,
     decimals: 18,
     symbol: "ETH",
-    name: "ETH"
+    name: "ETH",
+    isNative: true
   },
   [ChainId.BSC]: {
     chainId: ChainId.BSC,
     decimals: 18,
     symbol: "BNB",
-    name: "BNB"
+    name: "BNB",
+    isNative: true
   },
   [ChainId.BSC_TESTNET]: {
     chainId: ChainId.BSC_TESTNET,
     decimals: 18,
     symbol: "TBNB",
-    name: "TBNB"
+    name: "TBNB",
+    isNative: true
   }
 };
